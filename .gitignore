@@ -1,0 +1,42 @@
+# 文件说明：忽略本地密钥、缓存、临时文件和不应提交的用户配置。
+
+# 密钥 / 环境变量
+.env
+.env.*
+!.env.example
+
+# 用户配置（示例在 tools/*/config-examples/ 和 tools/*/examples/，工作副本在 config/）
+config/*.env
+config/*.yaml
+config/*.md
+!config/.gitkeep
+!config/README.md
+
+# 回收站 / 临时
+_trash/
+_tmp/
+*.tmp
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+*.swp
+*~
+
+# 可选能力生成的中间产物（按需保留时可删此行）
+inbox/sample-ai-workspace.md
+
+# OS / 编辑器
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

@@ -1,0 +1,54 @@
+# 假设追踪 Integration（基座自带 · 决策追踪）
+
+> 假设追踪是**基座自带能力**，不是要另装的外部模块。
+> 用 `hypothesis/` 目录管理投资 / 研究假设、证据和复盘，开箱即用，无需 `git clone`。
+> 触发：做研究、复盘、或讨论某条假设时，agent 自动读写 `hypothesis/`。
+
+## 集成原则
+
+- 基座自带，**不依赖任何外部 repo**——所有读写都落在本工作区的 `hypothesis/` 与 `wiki/explorations/`。
+- 一条假设一个文件 `hypothesis/H{n}-{slug}.md`，证据追加在同一文件里。
+- 假设成熟为稳定结论后，沉淀到 `wiki/explorations/`，不另起炉灶。
+
+## 推荐位置
+
+```text
+my-lodestar/
+├── hypothesis/                 # 假设、证据、复盘（基座目录，agent 直接读写）
+│   └── H*.md                   #   一条假设一个文件
+└── wiki/explorations/          # 假设成熟后沉淀的综合判断
+```
+
+## 文件契约
+
+| 动作 | 路径 |
+|---|---|
+| 读写假设与证据 | `hypothesis/H*.md` |
+| 读取知识库背景 | `wiki/entities/` / `wiki/concepts/` / `wiki/explorations/` |
+| 复盘结论沉淀 | `wiki/explorations/` |
+
+## 在 workspace-config 登记
+
+基座自带，默认 `enabled`，无需 `project_path`：
+
+```markdown
+### 假设追踪（基座自带）
+- status: `enabled`
+- slot: `decision`
+- reads_from:
+  - `hypothesis/`
+  - `wiki/`
+- writes_to:
+  - `hypothesis/`
+  - `wiki/explorations/`
+```
+
+## Agent 使用入口
+
+> 复盘 H3 这条假设的最新证据。
+
+## 边界
+
+- 只管假设的记录、证据归集和复盘，不抓材料、不产日报。
+- 证据通常由 daily-watchlist 等输出模块回写进 `hypothesis/`，假设追踪负责组织和复盘。
+- 假设升级为稳定结论后，沉淀到 `wiki/explorations/`，并标注事实 / 推测 / 待验证。
